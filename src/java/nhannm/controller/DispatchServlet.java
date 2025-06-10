@@ -5,6 +5,7 @@
 
 package nhannm.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,16 +25,25 @@ import jakarta.servlet.http.HttpServletResponse;
 //co san luon dau '/'
 
 public class DispatchServlet extends HttpServlet {
+    //url default: nghia la set default trang cua minh la login
+    private final String LOGIN_PAGE = "login.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //1. Nguoi ta da click nut gi. Nghia la button se chua 
         //value giup biet duoc dang su dung nut cua button nao
         String button = request.getParameter("btAction");
+        //luc dau value se la null vi chua truyen parameter 
+        //nghia la tren duong dan chua co dau "?"
+        //_Mac dinh cho trang dau tien la login
+        String url = LOGIN_PAGE;
         response.setContentType("text/html;charset=UTF-8");
         try {
-        
+            if(button == null){ // request dau tien
+                
+            }
         } finally{
-            
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     } 
 
@@ -74,3 +84,4 @@ public class DispatchServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+//_Khi len duong truyen va go thi thang DispatchServlet se la thang chay dau tien
