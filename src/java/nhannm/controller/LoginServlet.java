@@ -4,6 +4,7 @@
  */
 package nhannm.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,15 +24,6 @@ public class LoginServlet extends HttpServlet {
     private final String SEARCH_PAGE = "search.html";
     private final String INVALID_PAGE = "invalid.html";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,29 +31,37 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         //1. get all users information
         String url = INVALID_PAGE;
-        String button = request.getParameter("btAction");
+
+        //_Vi minh da chot nut nao ben dieu phoi roi nen se khong lay ra nua
+        //String button = request.getParameter("btAction");
+        
+        //_Lay hai parameter ra tu form
+        String username = request.getParameter("txtUsername");
+        String password = request.getParameter("txtPassword");
+
         try {
-            //_check xem form da submit chua
-            if (button.equals("Login")) {
-                //_neu co thi lay 2 param kia
-                String username = request.getParameter("txtUsername");
-                String password = request.getParameter("txtPassword");
-                //2. controller calls method Model
-                //2.1 new Dao object
-                RegistrationDAO dao = new RegistrationDAO();
-                //2.2 call method of Dao object
-                boolean result = dao.checkLogin(username, password);
-                //3. process
-                if (result) {
-                    url = SEARCH_PAGE;
-                }
-            }//user click login button
+
+            //2. controller calls method Model
+            //2.1 new Dao object
+            RegistrationDAO dao = new RegistrationDAO();
+            //2.2 call method of Dao object
+            boolean result = dao.checkLogin(username, password);
+            //3. process
+            if (result) {
+                url = SEARCH_PAGE;
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            response.sendRedirect(url);
+            //_Thang nay se lam minh bi show duong truyen
+            //response.sendRedirect(url);
+            //fix:
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            //Luc nay cai contextpath sau cung se duoc an di ma se hien anh dieu phoi
             out.close();
         }
     }

@@ -27,6 +27,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DispatchServlet extends HttpServlet {
     //url default: nghia la set default trang cua minh la login
     private final String LOGIN_PAGE = "login.html";
+    //Chuyen den servlet chuc nang
+    private final String LOGIN_CONTROLLER = "LoginServlet";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //1. Nguoi ta da click nut gi. Nghia la button se chua 
@@ -40,6 +43,12 @@ public class DispatchServlet extends HttpServlet {
         try {
             if(button == null){ // request dau tien
                 
+            }else{
+                switch (button) {
+                    case "Login":{
+                        url = LOGIN_CONTROLLER;
+                    }
+                }
             }
         } finally{
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -85,3 +94,12 @@ public class DispatchServlet extends HttpServlet {
 
 }
 //_Khi len duong truyen va go thi thang DispatchServlet se la thang chay dau tien
+
+//De them mot chuc nang moi vao mo hinh MVC BreakDown
+//+B1: tao tat ca cac giao dien view tro den dieu phoi(dispatcher)
+//va copy gia tri parameter tu dieu phoi(dispatcher) vao ben trong name nut len
+//+B2: mapping tinh nang moi vao ben trong dieu phoi(DispatchServlet) va su dung
+//value cua nut lenh
+//+B3: tao servlet chuc nang(LoginServlet) sau do copy dia chia url-pattern tai WDD
+//+B4: tao hay goi DAO chua co thi tao co roi thi goi
+//+B5: tao hoac goi DTO new view la view dong
