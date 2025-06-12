@@ -4,64 +4,43 @@
  */
 package nhannm.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import nhannm.registration.RegistrationDAO;
 
 /**
  *
  * @author ADMIN
  */
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "SearchLastnameServlet", urlPatterns = {"/SearchLastnameServlet"})
+public class SearchLastnameServlet extends HttpServlet {
 
-    //_Tao hai hang so de chuyen page
     private final String SEARCH_PAGE = "search.html";
-    private final String INVALID_PAGE = "invalid.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //_Neu khong dem ra ngoai thi bi bug
-        PrintWriter out = response.getWriter();
-        //1. get all users information
-        String url = INVALID_PAGE;
-
-        //_Vi minh da chot nut nao ben dieu phoi roi nen se khong lay ra nua
-        //String button = request.getParameter("btAction");
-        
-        //_Lay hai parameter ra tu form
-        String username = request.getParameter("txtUsername");
-        String password = request.getParameter("txtPassword");
-
+        //(search theo lastname)
+        //_Mac dinh cho url la trang search
+        String url = SEARCH_PAGE;
+        //1. Lay toan bo thong tin cua nguoi dung 
+        String searchValue = request.getParameter("txtSearchValue");
         try {
-            //2. controller calls method Model
-            //2.1 new Dao object
-            RegistrationDAO dao = new RegistrationDAO();
-            //2.2 call method of Dao object
-            boolean result = dao.checkLogin(username, password);
-            //3. process
-            if (result) {
-                url = SEARCH_PAGE;
+            //_Khi co value thi moi tien hanh search con neu khong co thi se 
+            //cho no load lai trang
+            if (!searchValue.trim().isEmpty()) {
+                //2. Controller call method of Model
+                //2.1 new DAO object
+                RegistrationDAO dao = new RegistrationDAO();
+                //2.2 call method DAO object
+                //3.  process
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         } finally {
-            //_Thang nay se lam minh bi show duong truyen
-            //response.sendRedirect(url);
-            //fix:
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            //Luc nay cai contextpath sau cung se duoc an di ma se hien anh dieu phoi
-            out.close();
+
         }
     }
 

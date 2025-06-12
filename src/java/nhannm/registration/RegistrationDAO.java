@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import nhannm.util.DBHelper;
 
 /**
@@ -70,4 +71,14 @@ public class RegistrationDAO implements Serializable {
         }
         return result;
     }
+    
+    //_Minh dang search se ra nhieu dong DTO
+    //_Moi dong tuong ung voi 1 dong DTO
+    private List<RegistrationDTO> accounts;
+
+    public List<RegistrationDTO> getAccounts() {
+        return accounts;
+    }
+    
+    
 }

@@ -29,6 +29,7 @@ public class DispatchServlet extends HttpServlet {
     private final String LOGIN_PAGE = "login.html";
     //Chuyen den servlet chuc nang
     private final String LOGIN_CONTROLLER = "LoginServlet";
+    private final String SEARCH_LASTNAME_CONTROLLER = "SearchLastnameServlet";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -47,6 +48,10 @@ public class DispatchServlet extends HttpServlet {
                 switch (button) {
                     case "Login":{
                         url = LOGIN_CONTROLLER;
+                    }
+                    case "Search":{
+                        url = SEARCH_LASTNAME_CONTROLLER;
+                        break;
                     }
                 }
             }
