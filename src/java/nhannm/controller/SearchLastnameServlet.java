@@ -73,6 +73,9 @@ public class SearchLastnameServlet extends HttpServlet {
                 //*Tai thoi diem nay co 2 parameter btAction, txtSearchValue do form
                 //search dang truyen ve phia server thong qua dispatcher la btAction, 1 attribute
                 //SEARCH_RESULT
+                
+                //**Cau lenh de lay ra danh sach kq tam thoi luu trong Attribute
+                //List<RegistrationDTO> result = (List<RegistrationDTO>)request.getAttribute("SEARCH_RESULT");
             }
         }
         catch(SQLException ex){
