@@ -57,7 +57,30 @@
                         <tbody>
                             <% 
                                 //Viet code java
-                                
+                                //_Tao con bien de dem no.
+                                int count = 0;
+                                for (RegistrationDTO dto : result) {
+                                    %>
+                                    <!-- Cu phap dong mo the scriplet giup chen doan ma html vao giua --> 
+                                    <tr>
+                                        <td>
+                                            <%= ++count %>
+                                        </td>
+                                        <td>
+                                            <%= dto.getUsername() %>
+                                        </td>
+                                        <td>
+                                            <%= dto.getPassword() %>
+                                        </td>
+                                        <td>
+                                            <%= dto.getFullName() %>
+                                        </td>
+                                        <td>
+                                            <%= dto.isRole() %>
+                                        </td>
+                                    </tr>
+                            <%
+                                }
                             %>
                         </tbody>
                     </table>
@@ -72,7 +95,6 @@
                         </font>
                     </h2>
         <%
-                    
                 }
             }//having request parameter
         %>

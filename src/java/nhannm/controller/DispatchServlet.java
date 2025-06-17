@@ -48,6 +48,7 @@ public class DispatchServlet extends HttpServlet {
                 switch (button) {
                     case "Login":{
                         url = LOGIN_CONTROLLER;
+                        break;
                     }
                     case "Search":{
                         url = SEARCH_LASTNAME_CONTROLLER;
