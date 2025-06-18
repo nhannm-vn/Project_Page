@@ -11,8 +11,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import nhannm.registration.RegistrationDAO;
+import nhannm.registration.RegistrationDTO;
 
 /**
  *
@@ -21,7 +23,8 @@ import nhannm.registration.RegistrationDAO;
 public class LoginServlet extends HttpServlet {
 
     //_Tao hai hang so de chuyen page
-    private final String SEARCH_PAGE = "search.html";
+    //_Trang giao dien dong
+    private final String SEARCH_PAGE = "search.jsp";
     private final String INVALID_PAGE = "invalid.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,9 +47,25 @@ public class LoginServlet extends HttpServlet {
             //2.1 new Dao object
             RegistrationDAO dao = new RegistrationDAO();
             //2.2 call method of Dao object
-            boolean result = dao.checkLogin(username, password);
+            RegistrationDTO result = dao.checkLogin(username, password);
             //3. process
-            if (result) {
+            if (result != null) { // Nghia la co duoc du lieu dto sau khi login success
+                //_Trong truong hop truyen vao true no di check xem co ton tai khong
+                //neu k ton tai thi tu dong tao session moi
+                //_Khi nao can check session co ton tai thi dung false con neu
+                //khong de gi thi mac dinh se la true
+                //_Ben nay thang getSession giong giong setAttribute vay: chua co thi tao moi
+                
+                //_Hanh dong tao moi session. Ma session scope nay co khi nguoi dung 
+                //gui yeu cau request len
+                HttpSession session = request.getSession();
+                
+                //_Sau khi co vung scope roi thi se tien hanh luu obj dto vao
+                //ben trong Attribute tai dang thao tac tai phia server
+                session.setAttribute("USER_INFO", result);
+                
+                //_Tien hanh dieu huong sang trang jsp vi bay gio dao dien da 
+                //khong con la tinh nua ma da chuyen thanh dong
                 url = SEARCH_PAGE;
             }
 
