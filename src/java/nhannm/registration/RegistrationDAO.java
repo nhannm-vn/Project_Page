@@ -21,10 +21,18 @@ import nhannm.util.DBHelper;
 public class RegistrationDAO implements Serializable {
 
     //_Phuong thuc check login de check tk co ton tai chua
-    public boolean checkLogin(String username, String password) throws SQLException,
+    //public boolean checkLogin(String username, String password) throws SQLException,
+    //       ClassNotFoundException {
+    //_Bay gio kieu du lieu tra ra se la 1 dto nghia la 1 obj. Vi chung ta sau khi
+    //login thanh cong thi co nhu cau hien thi welcome + lastname. Chu khong con la
+    //check xem co login hay khong thoi
+    public RegistrationDTO checkLogin(String username, String password) throws SQLException,
             ClassNotFoundException {
         //_Bien chot cua phuong thuc
-        boolean result = false;
+        //=> luc nay vi doi kieu du lieu tra ra nen minh cung se thay doi bien chot
+        //luc nay bien se chua 1 dto luon neu login success chu khong chi la mot 
+        //ket qua boolean
+        RegistrationDTO result = null;
         //_Tao nay de hung tu Connection ben DBHelper tra ra
         Connection con = null;
         //_Tao nay de hung thang dong
@@ -41,7 +49,11 @@ public class RegistrationDAO implements Serializable {
                 //neu khong se co loi SyntaxFromNear...
                 //_Tat ca cac table ten cot phai copy tu DB neu 
                 //khong se co loi Object not Found
-                String sql = "Select username "
+                
+                //**Luu y vi method da truyen vao username + password chinh vi 
+                //vay minh se khong query 2 thang do nua ma chi query 2 thang con
+                //thieu ma thoi
+                String sql = "Select lastname, isAdmin "
                         + "From Registration "
                         + "Where username = ? "
                         + "And password = ?";
@@ -53,10 +65,17 @@ public class RegistrationDAO implements Serializable {
                 stm.setString(2, password);
                 //2.3 excute query
                 rs = stm.executeQuery();
-                //3. model gets data..., then 
+                //3. model gets data from Result Set, then 
                 //model sets data to properties
-                if(rs.next()){
-                    result = true;
+                if(rs.next()){ //_Neu vao duoc if nghia la model get data success tu result set
+                    //_Khi co data thi tien hanh lay cac data de bo vao class 
+                    //va tao ra obj dto
+                    String fullName = rs.getString("lastname");
+                    boolean isAdmin = rs.getBoolean("isAdmin");
+                    
+                    //_Luu khi khi tao ra dto nguoi ta se khong luu password 
+                    //vi so nguy hiem hacker co the dom toi duoc
+                    result = new RegistrationDTO(username, null, fullName, isAdmin);
                 }
             }//_connection is an available
         } finally {
@@ -70,6 +89,7 @@ public class RegistrationDAO implements Serializable {
                 con.close();
             }
         }
+        //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
         return result;
     }
     
