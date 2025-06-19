@@ -90,7 +90,16 @@ public class RegistrationDTO implements Serializable {
     public void setRole(boolean role) {
         this.role = role;
     }
-    
-    
-    
+   
 }
+
+// EL syntax thay the cho expression 
+// Syntax: ${EL expression}
+// Tip1: Khi su dung EL hay standard action thi tat ca moi thu phai la attribute
+//(neu co JSP thi ContextScope => ApplicationScope type: ServletContext)
+// Tip2: Attribute mac dinh la bien ben trong JSP
+// Tip3: 
+//+Trong EL khi Attribute dung 1 minh khong kem toan tu
+//neu attribute = null thi EL se tu dong ep gia tri thanh ""
+//+Nguoc lai neu co attribute kem theo toan tu hay gt != null thi EL
+//se co co che tu dong ep kieu
