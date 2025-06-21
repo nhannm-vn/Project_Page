@@ -24,7 +24,9 @@ import nhannm.registration.RegistrationDTO;
 public class SearchLastnameServlet extends HttpServlet {
 
     //_Mac dinh khi vao servlet nay thi url cua no se dung tai trang search.html
-    private final String SEARCH_PAGE = "search.html";
+    //bay gio se cho no mac dinh la trang nay luon tai vi neu khong cho trang nay
+    //khi search ra ket qua va bam quay lai hoac ctrl R no se bi mat
+    private final String SEARCH_PAGE = "search.jsp";
     //_Khi co search value ca co hanh dong seach thi no chuyen sang trang 
     //search.jsp
     private final String SEARCH_RESULT = "search.jsp";

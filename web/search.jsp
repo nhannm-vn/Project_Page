@@ -5,8 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List" %>
-<%@page import="nhannm.registration.RegistrationDTO" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- 
+_Luu y khi cai su dung thang nay chon dung duong dan
+_Va phai them prefix dat ten neu khong se bug
+--%>
+
+<%--<%@page import="java.util.List" %>--%>
+<%--<%@page import="nhannm.registration.RegistrationDTO" %>--%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,9 +26,17 @@
         <h1>Search Page</h1> 
         <form action="DispatchServlet" >
             Search Value <input type="text" name="txtSearchValue" 
-                                value="<%= request.getParameter("txtSearchValue") %>"/> <br/>
+                                value="${param.txtSearchValue}"/> <br/>
             <input type="submit" value="Search" name="btAction"/>
-        </form>
+        </form><br/>
+        <%--Khai bao bien va gan cho no gt lay tu request gui len--%>
+        <c:set var="searchValue" value="${param.txtSearchValue}" />
+        <%--not empty dung de check khong null va khong rong--%>
+        <c:if test="${not empty searchValue}">
+            
+        </c:if>
+        
+        <%--
         <% 
             //_scriplet nhu service() o ben trong servlet object don nhan va xu li
             //+phai enter xuong dong vi tuan thu luat viet code cua java
@@ -101,5 +115,6 @@
                 }
             }//having request parameter
         %>
+    --%>
     </body>
 </html>
