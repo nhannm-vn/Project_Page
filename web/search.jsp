@@ -32,8 +32,52 @@ _Va phai them prefix dat ten neu khong se bug
         <%--Khai bao bien va gan cho no gt lay tu request gui len--%>
         <c:set var="searchValue" value="${param.txtSearchValue}" />
         <%--not empty dung de check khong null va khong rong--%>
+        <%--Neu co gia tri search thi tien hanh lam viec--%>
         <c:if test="${not empty searchValue}">
-            
+            <%--Khi co gia tri search nghia la se co list dto--%>
+            <c:set var="result" value="${requestScope.SEARCH_RESULT}" />
+            <%--Sau khi gan list dto vao bien thi can check list co ton tai khong--%>
+            <%--Neu ton tai thi show ra table--%>
+            <c:if test="${not empty result}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Full name</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="dto" items="${result}" varStatus="counter">
+                            <tr>
+                                <td>
+                                    ${counter.count}
+                                </td>
+                                <td>
+                                    ${dto.username}
+                                </td>
+                                <td>
+                                    ${dto.password}
+                                </td>
+                                <td>
+                                    ${dto.fullName}
+                                </td>
+                                <td>
+                                    ${dto.role}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
+            <%--Neu khong ton tai thi show ra thong bao--%>
+            <c:if test="${empty result}">
+                <h2>
+                    <font color="red">No record is matched!!!</font>
+                </h2>
+            </c:if>
         </c:if>
         
         <%--

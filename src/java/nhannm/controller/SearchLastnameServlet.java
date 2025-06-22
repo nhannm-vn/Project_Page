@@ -26,6 +26,7 @@ public class SearchLastnameServlet extends HttpServlet {
     //_Mac dinh khi vao servlet nay thi url cua no se dung tai trang search.html
     //bay gio se cho no mac dinh la trang nay luon tai vi neu khong cho trang nay
     //khi search ra ket qua va bam quay lai hoac ctrl R no se bi mat
+    //_Neu khong fix moi lan search xong vao lai trang search no se bi mat welcome
     private final String SEARCH_PAGE = "search.jsp";
     //_Khi co search value ca co hanh dong seach thi no chuyen sang trang 
     //search.jsp
