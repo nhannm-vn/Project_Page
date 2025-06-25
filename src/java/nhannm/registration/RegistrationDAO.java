@@ -211,7 +211,7 @@ public class RegistrationDAO implements Serializable {
                 
                 //3. checking effectRows are valid then model set
                 //data to properties of model
-                if(effectRows > 0){
+                if(effectRows > 0){ // neu so dong effect > 0 nghia la thuc hien thanh cong
                     result = true;
                 }
             }//_connection is an available
