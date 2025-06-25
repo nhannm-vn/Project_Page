@@ -30,6 +30,7 @@ public class DispatchServlet extends HttpServlet {
     //Chuyen den servlet chuc nang
     private final String LOGIN_CONTROLLER = "LoginServlet";
     private final String SEARCH_LASTNAME_CONTROLLER = "SearchLastnameServlet";
+    private final String DELETE_ACCOUNT_CONTROLLER = "DeleteAccountServlet";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -52,6 +53,10 @@ public class DispatchServlet extends HttpServlet {
                     }
                     case "Search":{
                         url = SEARCH_LASTNAME_CONTROLLER;
+                        break;
+                    }
+                    case "delete":{
+                        url = DELETE_ACCOUNT_CONTROLLER;
                         break;
                     }
                 }

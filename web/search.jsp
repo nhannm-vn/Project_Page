@@ -77,6 +77,10 @@ _Va phai them prefix dat ten neu khong se bug
                                         <c:param name="lastSearchValue" 
                                                  value="${param.txtSearchValue}" />
                                     </c:url>
+                                    <%--
+                                        Cac value cua param deu giong nhau, chi
+                                    khac nhau o param pk
+                                    --%>
                                     <a href="${deleteLink}">Delete</a>
                                 </td>
                             </tr>
