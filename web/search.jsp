@@ -47,6 +47,7 @@ _Va phai them prefix dat ten neu khong se bug
                             <th>Password</th>
                             <th>Full name</th>
                             <th>Role</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +67,17 @@ _Va phai them prefix dat ten neu khong se bug
                                 </td>
                                 <td>
                                     ${dto.role}
+                                </td>
+                                <td>
+                                    <c:url var="deleteLink" value="DispatchServlet">
+                                        <c:param name="btAction" value="delete" />
+                                        <%--Lay gia tri hien hanh cua tung item--%>
+                                        <c:param name="pk" value="${dto.username}" />
+                                        <%--Param luu gia tri search de co the refresh lai--%>
+                                        <c:param name="lastSearchValue" 
+                                                 value="${param.txtSearchValue}" />
+                                    </c:url>
+                                    <a href="${deleteLink}">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
