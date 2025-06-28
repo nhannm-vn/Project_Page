@@ -8,6 +8,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -67,6 +68,11 @@ public class LoginServlet extends HttpServlet {
                 //_Tien hanh dieu huong sang trang jsp vi bay gio dao dien da 
                 //khong con la tinh nua ma da chuyen thanh dong
                 url = SEARCH_PAGE;
+                
+                //write: moi lan login thanh cong thi minh se luu cookies
+                Cookie cookie = new Cookie(username, password);
+                cookie.setMaxAge(60 * 3);
+                response.addCookie(cookie);
             }
 
         } catch (SQLException ex) {
