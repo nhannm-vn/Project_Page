@@ -121,3 +121,5 @@ public class DispatchServlet extends HttpServlet {
 //+B3: tao servlet chuc nang(LoginServlet) sau do copy dia chia url-pattern tai WDD
 //+B4: tao hay goi DAO chua co thi tao co roi thi goi
 //+B5: tao hoac goi DTO new view la view dong
+
+

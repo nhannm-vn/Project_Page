@@ -130,3 +130,14 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+/*
+    Flow: open browser nghia la co request dau tien voi button co value la null
+thi se duoc DispatchServlet dieu phoi vao CheckAccountServlet 
+_Sau do no se lay mang cookies xuong 
+_Neu co mang cookies thi no lay thang cuoi do theo quy luat ghi de
+_Lay ra name va value tu cookie cuoi cung do
+_Goi method checkLogin ra neu nhu co result thi nghia la hop le va cho vao trang search luon
+_Sau do phai tao scope va luu cai result do bang attribute de co duoc welcome + fullname
+Flow: neu mo lan dau ma chua co cookie thi khi bam button login thi se duoc dispatchServlet
+    dieu phoi vao LoginServlet va tao cookie o lan login lan dau
+*/
