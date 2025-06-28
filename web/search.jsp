@@ -55,6 +55,8 @@ _Va phai them prefix dat ten neu khong se bug
                         <c:forEach var="dto" items="${result}" varStatus="counter">
                         <%--Nghia la vi nut update la button co dang submit nen
                         khi bam button do thi cac can cac o input de co gia tri ma truyen di
+                        **Nghia la o nao muon nguoi dung update thi fix cho no them o input dang text
+                        de no fix du lieu sau do moi bam button update de update du lieu
                         --%>
                         <form action="DispatchServlet" method="POST">
                             <tr>
@@ -70,13 +72,21 @@ _Va phai them prefix dat ten neu khong se bug
                                            value="${dto.username}" />
                                 </td>
                                 <td>
-                                    ${dto.password}
+                                    <%--Thang nay mo cho user sua nen can o text la khong an di--%>
+                                    <input type="text" name="txtPassword"
+                                           value="${dto.password}" />
                                 </td>
                                 <td>
                                     ${dto.fullName}
                                 </td>
                                 <td>
-                                    ${dto.role}
+                                    <input  type="checkbox" 
+                                            name="chkAdmin" 
+                                            value="ON" 
+                                            <c:if test="${dto.role}" >
+                                               checked="checked"
+                                            </c:if>
+                                    />
                                 </td>
                                 <td>
                                     <c:url var="deleteLink" value="DispatchServlet">
@@ -92,6 +102,14 @@ _Va phai them prefix dat ten neu khong se bug
                                     khac nhau o param pk
                                     --%>
                                     <a href="${deleteLink}">Delete</a>
+                                </td>
+                                <td>
+                                    <%--Them thang nay de refresh lai chuc nang truoc do
+                                    nhung phai an no di vi de len no se bi thua vi khong can thiet--%>
+                                    <input type="hidden" name="lastSearchValue" 
+                                           value="${searchValue}" />
+                                    <%--Thang nay nhu thang submit cua form chot chuc nang update--%>
+                                    <input type="submit" value="Update" name="btAction" />
                                 </td>
                             </tr>
                         </form>
