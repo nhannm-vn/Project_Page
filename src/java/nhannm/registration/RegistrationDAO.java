@@ -252,12 +252,22 @@ public class RegistrationDAO implements Serializable {
                 
                 //_Minh se can username(pk) de biet chinh xac la thang nao ma 
                 //update password and isAdmin cho no
-                String sql = "Update";
+                String sql = "Update Registration "
+                        + "Set password = ?, isAdmin = ? "
+                        + "Where username = ?";
                 //_Cau lenh SQL la cau lenh tinh va nap vao the truy van
                 //2.2 create Statment Objects
                 stm = con.prepareStatement(sql);
-                //_Truyen co bao nhieu dau ? thi truyen het
-                stm.setString(1, username);
+                //_Truyen dung so, co bao nhieu dau ? thi phai truyen het
+                stm.setString(1, password);
+                // Nếu checkbox không được chọn (không có checked),
+                //                 nghia la value khong phai la ON
+                if(isAdmin != null && isAdmin.equals("ON")){
+                    stm.setString(2, "1");
+                }else{
+                    stm.setString(2, "0");
+                }
+                stm.setString(3, username);
                 //2.3 excute query
                 //**Tat ca cau lenh insert, delete, update thi tra ra so dong integer
                 //effect. Va se la executeUpdate chu khong con la excuteQuery

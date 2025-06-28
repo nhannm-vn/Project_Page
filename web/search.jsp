@@ -80,6 +80,8 @@ _Va phai them prefix dat ten neu khong se bug
                                     ${dto.fullName}
                                 </td>
                                 <td>
+                                    <%--Nếu checkbox không được chọn (không có checked),
+                                    nghia la value khong phai la ON--%>
                                     <input  type="checkbox" 
                                             name="chkAdmin" 
                                             value="ON" 

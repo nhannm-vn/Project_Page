@@ -32,6 +32,7 @@ public class DispatchServlet extends HttpServlet {
     private final String SEARCH_LASTNAME_CONTROLLER = "SearchLastnameServlet";
     private final String DELETE_ACCOUNT_CONTROLLER = "DeleteAccountServlet";
     private final String UPDATE_ACCOUNT_CONTROLLER = "UpdateAccountServlet";
+    private final String CHECK_ACCOUNT_CONTROLLER = "CheckAccountServlet";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -45,7 +46,9 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             if(button == null){ // request dau tien
-                
+                // Tai lan dau tien check cookies co ton tai hay chua
+                //neu chua co thi chac chan lan thu nhat
+                url = CHECK_ACCOUNT_CONTROLLER;
             }else{
                 switch (button) {
                     case "Login":{
