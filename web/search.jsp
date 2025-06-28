@@ -48,16 +48,26 @@ _Va phai them prefix dat ten neu khong se bug
                             <th>Full name</th>
                             <th>Role</th>
                             <th>Delete</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="dto" items="${result}" varStatus="counter">
+                        <%--Nghia la vi nut update la button co dang submit nen
+                        khi bam button do thi cac can cac o input de co gia tri ma truyen di
+                        --%>
+                        <form action="DispatchServlet" method="POST">
                             <tr>
                                 <td>
                                     ${counter.count}
                                 </td>
                                 <td>
                                     ${dto.username}
+                                    <%--Thang nay an di do truyen di nhung minh khong
+                                    mo cho nguoi dung thay doi ma update nen no se la hidden
+                                    va dong thoi no an di nen can render ra du lieu cua no luon--%>
+                                    <input type="hidden" name="txtUsername"
+                                           value="${dto.username}" />
                                 </td>
                                 <td>
                                     ${dto.password}
@@ -84,6 +94,7 @@ _Va phai them prefix dat ten neu khong se bug
                                     <a href="${deleteLink}">Delete</a>
                                 </td>
                             </tr>
+                        </form>
                         </c:forEach>
                     </tbody>
                 </table>
