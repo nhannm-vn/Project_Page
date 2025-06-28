@@ -227,4 +227,57 @@ public class RegistrationDAO implements Serializable {
         return result;
     }
     
+    //_Phai truyen vao ca ba thong tin thi moi update duoc dung thang can update
+    public boolean updateAccount(String username, String password, String isAdmin) throws SQLException,
+            ClassNotFoundException {
+        //_Bien chot luc nay se la boolean 
+        boolean result = false;
+        //_Tao nay de hung tu Connection ben DBHelper tra ra
+        Connection con = null;
+        //_Tao nay de hung thang dong
+        PreparedStatement stm = null;
+        //_Minh khong can lay du lieu nen khong co result set
+        //ResultSet rs = null;
+        try {
+            //1. model connects DB
+            con = DBHelper.makeConnection();
+            if(con != null){
+                //2. model truy van du lieu tu DB
+                //2.1 create SQL String
+                //_Moi menh de cua cau lenh sql phai duoc viet tren 1 dong
+                //_Truoc khi xuong dong phai chen mot khoang trang 
+                //neu khong se co loi SyntaxFromNear...
+                //_Tat ca cac table ten cot phai copy tu DB neu 
+                //khong se co loi Object not Found
+                
+                //_Minh se can username(pk) de biet chinh xac la thang nao ma 
+                //update password and isAdmin cho no
+                String sql = "Update";
+                //_Cau lenh SQL la cau lenh tinh va nap vao the truy van
+                //2.2 create Statment Objects
+                stm = con.prepareStatement(sql);
+                //_Truyen co bao nhieu dau ? thi truyen het
+                stm.setString(1, username);
+                //2.3 excute query
+                //**Tat ca cau lenh insert, delete, update thi tra ra so dong integer
+                //effect. Va se la executeUpdate chu khong con la excuteQuery
+                int effectRows = stm.executeUpdate();
+                
+                //3. checking effectRows are valid then model set
+                //data to properties of model
+                if(effectRows > 0){ // neu so dong effect > 0 nghia la thuc hien thanh cong
+                    result = true;
+                }
+            }//_connection is an available
+        } finally {
+            if(stm != null){
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
+        return result;
+    }
 }

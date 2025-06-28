@@ -90,7 +90,7 @@ _Va phai them prefix dat ten neu khong se bug
                                 </td>
                                 <td>
                                     <c:url var="deleteLink" value="DispatchServlet">
-                                        <c:param name="btAction" value="delete" />
+                                        <c:param name="btAction" value="Delete" />
                                         <%--Lay gia tri hien hanh cua tung item--%>
                                         <c:param name="pk" value="${dto.username}" />
                                         <%--Param luu gia tri search de co the refresh lai--%>
