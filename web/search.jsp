@@ -68,6 +68,7 @@ _Va phai them prefix dat ten neu khong se bug
                                     <%--Thang nay an di do truyen di nhung minh khong
                                     mo cho nguoi dung thay doi ma update nen no se la hidden
                                     va dong thoi no an di nen can render ra du lieu cua no luon--%>
+                                    <%--Nghia la neu no la hidden thi no can render ra--%>
                                     <input type="hidden" name="txtUsername"
                                            value="${dto.username}" />
                                 </td>
