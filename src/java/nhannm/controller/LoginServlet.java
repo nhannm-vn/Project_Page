@@ -70,8 +70,12 @@ public class LoginServlet extends HttpServlet {
                 url = SEARCH_PAGE;
                 
                 //write: moi lan login thanh cong thi minh se luu cookies
+                //==> Nho thang nay ma co the luu thong tin va duy tri dang nhap
+                //1. Tao cookie tu cap username and password
                 Cookie cookie = new Cookie(username, password);
+                //2. Set thoi gian ton tai cho cookies
                 cookie.setMaxAge(60 * 3);
+                //3. Tra cookies ra thong qua response
                 response.addCookie(cookie);
             }
 
