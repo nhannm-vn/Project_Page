@@ -143,5 +143,5 @@ _Lay ra name va value tu cookie cuoi cung do
 _Goi method checkLogin ra neu nhu co result thi nghia la hop le va cho vao trang search luon
 _Sau do phai tao scope va luu cai result do bang attribute de co duoc welcome + fullname
 Flow: neu mo lan dau ma chua co cookie thi khi bam button login thi se duoc dispatchServlet
-    dieu phoi vao LoginServlet va tao cookie o lan login lan dau
+    dieu phoi vao LoginServlet va tao cookie o lan login lan dau tien
 */
