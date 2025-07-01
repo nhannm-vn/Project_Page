@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import nhannm.registration.RegistrationCreateError;
+import nhannm.registration.RegistrationDAO;
 
 /**
  *
@@ -75,6 +76,7 @@ public class CreateAccountServlet extends HttpServlet {
             } else {
                 //2. call methods of model
                 //2.1 new DAO object
+                RegistrationDAO dao = new RegistrationDAO();
                 //2.2 call method of DAO object
                 //3. process
             }

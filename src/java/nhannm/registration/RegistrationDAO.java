@@ -41,7 +41,7 @@ public class RegistrationDAO implements Serializable {
         try {
             //1. model connects DB
             con = DBHelper.makeConnection();
-            if(con != null){
+            if (con != null) {
                 //2. model truy van du lieu tu DB
                 //2.1 create SQL String
                 //_Moi menh de cua cau lenh sql phai duoc viet tren 1 dong
@@ -49,7 +49,7 @@ public class RegistrationDAO implements Serializable {
                 //neu khong se co loi SyntaxFromNear...
                 //_Tat ca cac table ten cot phai copy tu DB neu 
                 //khong se co loi Object not Found
-                
+
                 //**Luu y vi method da truyen vao username + password chinh vi 
                 //vay minh se khong query 2 thang do nua ma chi query 2 thang con
                 //thieu ma thoi
@@ -67,22 +67,22 @@ public class RegistrationDAO implements Serializable {
                 rs = stm.executeQuery();
                 //3. model gets data from Result Set, then 
                 //model sets data to properties
-                if(rs.next()){ //_Neu vao duoc if nghia la model get data success tu result set
+                if (rs.next()) { //_Neu vao duoc if nghia la model get data success tu result set
                     //_Khi co data thi tien hanh lay cac data de bo vao class 
                     //va tao ra obj dto
                     String fullName = rs.getString("lastname");
                     boolean isAdmin = rs.getBoolean("isAdmin");
-                    
+
                     //_Luu khi khi tao ra dto nguoi ta se khong luu password 
                     //vi so nguy hiem hacker co the dom toi duoc
                     result = new RegistrationDTO(username, null, fullName, isAdmin);
                 }
             }//_connection is an available
         } finally {
-            if(rs != null){
+            if (rs != null) {
                 rs.close();
             }
-            if(stm != null){
+            if (stm != null) {
                 stm.close();
             }
             if (con != null) {
@@ -92,10 +92,9 @@ public class RegistrationDAO implements Serializable {
         //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
         return result;
     }
-    
+
     //_Minh dang search se ra nhieu dong DTO
     //_Moi dong tuong ung voi 1 dong DTO
-    
     //_Khai bao list accounts chua cac dong DTO tra ra
     //day la list chua cac accounts
     private List<RegistrationDTO> accounts;
@@ -105,9 +104,9 @@ public class RegistrationDAO implements Serializable {
     public List<RegistrationDTO> getAccounts() {
         return accounts;
     }
-    
+
     //_Phuong thuc search account dua tren searchValue
-    public void searchLastname(String searchValue)throws SQLException,
+    public void searchLastname(String searchValue) throws SQLException,
             ClassNotFoundException {
 
         //_Tao nay de hung tu Connection ben DBHelper tra ra
@@ -118,7 +117,7 @@ public class RegistrationDAO implements Serializable {
         try {
             //1. model connects DB
             con = DBHelper.makeConnection();
-            if(con != null){
+            if (con != null) {
                 //_Lay tat ca cac cot trong bang reigistration voi dk
                 //cot lastname co chua sort string
                 String sql = "Select username, password, lastname, isAdmin "
@@ -133,10 +132,10 @@ public class RegistrationDAO implements Serializable {
                 rs = stm.executeQuery();
                 //3. model gets data from result set, then 
                 //model sets data to properties
-                
+
                 //_Vi duoc nhieu dong du lieu nen se duyet while
                 //_Duyet du lieu(model get du lieu tu result set)
-                while(rs.next()){
+                while (rs.next()) {
                     //_Lay ra lan luot tung field gia tri
                     String username = rs.getString("username");
                     String password = rs.getString("password");
@@ -144,24 +143,24 @@ public class RegistrationDAO implements Serializable {
                     boolean role = rs.getBoolean("isAdmin");
                     //_Tao DTO vi cac gt dat trong DTO
                     //noi cach khac tao ra object tu cac gia tri tren
-                    RegistrationDTO dto = new RegistrationDTO(username, password, 
+                    RegistrationDTO dto = new RegistrationDTO(username, password,
                             fullName, role);
                     //_Set value vao trong list dto vi gia tri nay la nhieu dong
                     //nen duoc luu vao trong list
                     //_Neu chua co list thi tao list roi moi them gia tri vao
-                    if(this.accounts == null){
+                    if (this.accounts == null) {
                         this.accounts = new ArrayList<>();
                     }
                     //_Chua co thi tao, co roi thi them gia tri thoi
                     this.accounts.add(dto);
                 }//traverse each row in table
-                
+
             }//_connection is an available
         } finally {
-            if(rs != null){
+            if (rs != null) {
                 rs.close();
             }
-            if(stm != null){
+            if (stm != null) {
                 stm.close();
             }
             if (con != null) {
@@ -169,8 +168,7 @@ public class RegistrationDAO implements Serializable {
             }
         }
     }
-    
-    
+
     //_Truyen vao username nghia la parameter pk de xoa bang cau truy van
     public boolean deleteAccount(String username) throws SQLException,
             ClassNotFoundException {
@@ -185,7 +183,7 @@ public class RegistrationDAO implements Serializable {
         try {
             //1. model connects DB
             con = DBHelper.makeConnection();
-            if(con != null){
+            if (con != null) {
                 //2. model truy van du lieu tu DB
                 //2.1 create SQL String
                 //_Moi menh de cua cau lenh sql phai duoc viet tren 1 dong
@@ -193,7 +191,7 @@ public class RegistrationDAO implements Serializable {
                 //neu khong se co loi SyntaxFromNear...
                 //_Tat ca cac table ten cot phai copy tu DB neu 
                 //khong se co loi Object not Found
-                
+
                 //**Luu y vi method da truyen vao username + password chinh vi 
                 //vay minh se khong query 2 thang do nua ma chi query 2 thang con
                 //thieu ma thoi
@@ -208,15 +206,15 @@ public class RegistrationDAO implements Serializable {
                 //**Tat ca cau lenh insert, delete, update thi tra ra so dong integer
                 //effect. Va se la executeUpdate chu khong con la excuteQuery
                 int effectRows = stm.executeUpdate();
-                
+
                 //3. checking effectRows are valid then model set
                 //data to properties of model
-                if(effectRows > 0){ // neu so dong effect > 0 nghia la thuc hien thanh cong
+                if (effectRows > 0) { // neu so dong effect > 0 nghia la thuc hien thanh cong
                     result = true;
                 }
             }//_connection is an available
         } finally {
-            if(stm != null){
+            if (stm != null) {
                 stm.close();
             }
             if (con != null) {
@@ -226,7 +224,7 @@ public class RegistrationDAO implements Serializable {
         //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
         return result;
     }
-    
+
     //_Phai truyen vao ca ba thong tin thi moi update duoc dung thang can update
     public boolean updateAccount(String username, String password, String isAdmin) throws SQLException,
             ClassNotFoundException {
@@ -241,7 +239,7 @@ public class RegistrationDAO implements Serializable {
         try {
             //1. model connects DB
             con = DBHelper.makeConnection();
-            if(con != null){
+            if (con != null) {
                 //2. model truy van du lieu tu DB
                 //2.1 create SQL String
                 //_Moi menh de cua cau lenh sql phai duoc viet tren 1 dong
@@ -249,7 +247,7 @@ public class RegistrationDAO implements Serializable {
                 //neu khong se co loi SyntaxFromNear...
                 //_Tat ca cac table ten cot phai copy tu DB neu 
                 //khong se co loi Object not Found
-                
+
                 //_Minh se can username(pk) de biet chinh xac la thang nao ma 
                 //update password and isAdmin cho no
                 String sql = "Update Registration "
@@ -262,9 +260,9 @@ public class RegistrationDAO implements Serializable {
                 stm.setString(1, password);
                 // Nếu checkbox không được chọn (không có checked),
                 //                 nghia la value khong phai la ON
-                if(isAdmin != null && isAdmin.equals("ON")){
+                if (isAdmin != null && isAdmin.equals("ON")) {
                     stm.setString(2, "1");
-                }else{
+                } else {
                     stm.setString(2, "0");
                 }
                 stm.setString(3, username);
@@ -272,15 +270,76 @@ public class RegistrationDAO implements Serializable {
                 //**Tat ca cau lenh insert, delete, update thi tra ra so dong integer
                 //effect. Va se la executeUpdate chu khong con la excuteQuery
                 int effectRows = stm.executeUpdate();
-                
+
                 //3. checking effectRows are valid then model set
                 //data to properties of model
-                if(effectRows > 0){ // neu so dong effect > 0 nghia la thuc hien thanh cong
+                if (effectRows > 0) { // neu so dong effect > 0 nghia la thuc hien thanh cong
                     result = true;
                 }
             }//_connection is an available
         } finally {
-            if(stm != null){
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
+        return result;
+    }
+
+    // Khi truyen vao nhieu hon 2 parameter nen suy nghi den viec truyen vao object
+    public boolean createAccount(RegistrationDTO account) throws SQLException,
+            ClassNotFoundException {
+        //_Bien chot cua phuong thuc
+        //=> luc nay vi doi kieu du lieu tra ra nen minh cung se thay doi bien chot
+        //luc nay bien se chua 1 dto luon neu login success chu khong chi la mot 
+        //ket qua boolean
+        boolean result = false;
+        //_Tao nay de hung tu Connection ben DBHelper tra ra
+        Connection con = null;
+        //_Tao nay de hung thang dong
+        PreparedStatement stm = null;
+        try {
+            //1. model connects DB
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                //2. model truy van du lieu tu DB
+                //2.1 create SQL String
+                //_Moi menh de cua cau lenh sql phai duoc viet tren 1 dong
+                //_Truoc khi xuong dong phai chen mot khoang trang 
+                //neu khong se co loi SyntaxFromNear...
+                //_Tat ca cac table ten cot phai copy tu DB neu 
+                //khong se co loi Object not Found
+
+                //**Luu y vi method da truyen vao username + password chinh vi 
+                //vay minh se khong query 2 thang do nua ma chi query 2 thang con
+                //thieu ma thoi
+                String sql = "Insert Into Registration("
+                        + "username, password, lastname, isAdmin"
+                        + ") Values("
+                        + "?, ?, ?, ?"
+                        + ")";
+                //_Cau lenh SQL la cau lenh tinh va nap vao the truy van
+                //2.2 create Statment Objects
+                stm = con.prepareStatement(sql);
+                //_Truyen co bao nhieu dau ? thi truyen het
+                stm.setString(1, account.getUsername());
+                stm.setString(2, account.getPassword());
+                stm.setString(3, account.getFullName());
+                stm.setBoolean(4, account.isRole());
+                //2.3 excute query
+                int effectRows = stm.executeUpdate();
+
+                //3. model gets data from Result Set, then 
+                //model sets data to properties
+                if(effectRows > 0){
+                    result = true;
+                }
+            }//_connection is an available
+        } finally {
+            if (stm != null) {
                 stm.close();
             }
             if (con != null) {
