@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 
         //_Vi minh da chot nut nao ben dieu phoi roi nen se khong lay ra nua
         //String button = request.getParameter("btAction");
-        
         //_Lay hai parameter ra tu form
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
@@ -56,19 +55,19 @@ public class LoginServlet extends HttpServlet {
                 //_Khi nao can check session co ton tai thi dung false con neu
                 //khong de gi thi mac dinh se la true
                 //_Ben nay thang getSession giong giong setAttribute vay: chua co thi tao moi
-                
+
                 //_Hanh dong tao moi session. Ma session scope nay co khi nguoi dung 
                 //gui yeu cau request len
                 HttpSession session = request.getSession();
-                
+
                 //_Sau khi co vung scope roi thi se tien hanh luu obj dto vao
                 //ben trong Attribute tai dang thao tac tai phia server
                 session.setAttribute("USER_INFO", result);
-                
+
                 //_Tien hanh dieu huong sang trang jsp vi bay gio dao dien da 
                 //khong con la tinh nua ma da chuyen thanh dong
                 url = SEARCH_PAGE;
-                
+
                 //write: moi lan login thanh cong thi minh se luu cookies
                 //==> Nho thang nay ma co the luu thong tin va duy tri dang nhap
                 //1. Tao cookie tu cap username and password
@@ -80,9 +79,9 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            log("SQL: " + ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            log("Class Not Found: " + ex.getMessage());
         } finally {
             //_Thang nay se lam minh bi show duong truyen
             //response.sendRedirect(url);

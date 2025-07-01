@@ -11,8 +11,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import nhannm.registration.RegistrationCreateError;
 import nhannm.registration.RegistrationDAO;
+import nhannm.registration.RegistrationDTO;
 
 /**
  *
@@ -20,13 +22,14 @@ import nhannm.registration.RegistrationDAO;
  */
 @WebServlet(name = "CreateAccountServlet", urlPatterns = {"/CreateAccountServlet"})
 public class CreateAccountServlet extends HttpServlet {
+
     private final String ERROR_PAGE = "createAccount.jsp";
     private final String LOGIN_PAGE = "login.html";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = ERROR_PAGE;
         //1. get all user's information
         String username = request.getParameter("txtUsername");
@@ -73,14 +76,20 @@ public class CreateAccountServlet extends HttpServlet {
                 //**Phai luu thi moi co cai lay ra ben jsp de show ra duoc
                 //vi minh chi muon luu tam thoi de show ra nen se xai requestScope
                 //va dang dung tai server nen se su dung attribute
-            } else {
+            } else {// Neu khong co loi thi tao account
                 //2. call methods of model
                 //2.1 new DAO object
                 RegistrationDAO dao = new RegistrationDAO();
                 //2.2 call method of DAO object
+                RegistrationDTO account = new RegistrationDTO(username, password, fullname, false);
+                boolean result = dao.createAccount(account);
                 //3. process
             }
 
+        } catch (SQLException ex) {
+            log("SQL: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            log("Class Not Found: " + ex.getMessage());
         } finally {
             //Dang chua 5 parameter va 1 attribute
             //Ca parameter va attribute deu giu lai vi minh muon show loi

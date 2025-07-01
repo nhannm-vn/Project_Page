@@ -31,7 +31,6 @@ public class SearchLastnameServlet extends HttpServlet {
     //_Khi co search value ca co hanh dong seach thi no chuyen sang trang 
     //search.jsp
     private final String SEARCH_RESULT = "search.jsp";
-    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,18 +75,15 @@ public class SearchLastnameServlet extends HttpServlet {
                 //*Tai thoi diem nay co 2 parameter btAction, txtSearchValue do form
                 //search dang truyen ve phia server thong qua dispatcher la btAction, 1 attribute
                 //SEARCH_RESULT
-                
+
                 //**Cau lenh de lay ra danh sach kq tam thoi luu trong Attribute
                 //List<RegistrationDTO> result = (List<RegistrationDTO>)request.getAttribute("SEARCH_RESULT");
             }
-        }
-        catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        catch(ClassNotFoundException ex){
-            ex.printStackTrace();
-        }
-        finally {
+        } catch (SQLException ex) {
+            log("SQL: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            log("Class Not Found: " + ex.getMessage());
+        } finally {
             //_Phai dung request dispatch vi duy tri ket qua trinh bay
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
