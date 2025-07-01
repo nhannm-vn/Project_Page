@@ -33,6 +33,7 @@ public class DispatchServlet extends HttpServlet {
     private final String DELETE_ACCOUNT_CONTROLLER = "DeleteAccountServlet";
     private final String UPDATE_ACCOUNT_CONTROLLER = "UpdateAccountServlet";
     private final String CHECK_ACCOUNT_CONTROLLER = "CheckAccountServlet";
+    private final String CREATE_ACCOUNT_CONTROLLER = "CreateAccountServlet";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -65,6 +66,11 @@ public class DispatchServlet extends HttpServlet {
                     }
                     case "Update":{
                         url = UPDATE_ACCOUNT_CONTROLLER;
+                        break;
+                    }
+                    case "Create New Account":{
+                        url = CREATE_ACCOUNT_CONTROLLER;
+                        break;
                     }
                 }
             }
