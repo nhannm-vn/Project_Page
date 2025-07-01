@@ -10,6 +10,8 @@ import java.io.Serializable;
  *
  * @author ADMIN
  */
+
+//**Class duc ra object chua loi. No la javabean vi khong mapping du lieu duoi DB
 public class RegistrationCreateError implements Serializable {
     // user error
     private String usernameLengthErr;
