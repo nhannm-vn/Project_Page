@@ -84,10 +84,23 @@ public class CreateAccountServlet extends HttpServlet {
                 RegistrationDTO account = new RegistrationDTO(username, password, fullname, false);
                 boolean result = dao.createAccount(account);
                 //3. process
+                //**Neu tao thanh cong account thi vao login
+                if(result){
+                    url = LOGIN_PAGE;
+                }
             }
-
+        //**Loi he thong la sau khi thuc thi
         } catch (SQLException ex) {
-            log("SQL: " + ex.getMessage());
+            String msg = ex.getMessage();
+            log("SQL: " +msg);
+            //**Neu o tren khong co loi va vao else thi se tao account. Nhung neu 
+            //username trung trong DB thi loi se vao catch nay
+            //**Loi nay phat sinh khi khong co cac loi entity va trung primary key
+            if(msg.contains("duplicate")){// Neu co loi nay thi minh se set loi vao obj errors 
+                errors.setUsernameIsExisted(username + "IS EXISTED");
+                //**Luu bang attribute vao request scope de show ra loi ben jsp
+                request.setAttribute("CREATE_ERRORS", errors);
+            }
         } catch (ClassNotFoundException ex) {
             log("Class Not Found: " + ex.getMessage());
         } finally {
