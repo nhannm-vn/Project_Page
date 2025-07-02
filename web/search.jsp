@@ -29,6 +29,9 @@ _Va phai them prefix dat ten neu khong se bug
                                 value="${param.txtSearchValue}"/> <br/>
             <input type="submit" value="Search" name="btAction"/>
         </form><br/>
+        <form action="DispatchServlet">
+            <input type="submit" value="Logout" name="btAction" />
+        </form> <br/>
         <%--Khai bao bien va gan cho no gt lay tu request gui len--%>
         <c:set var="searchValue" value="${param.txtSearchValue}" />
         <%--not empty dung de check khong null va khong rong--%>
