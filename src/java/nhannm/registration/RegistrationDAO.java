@@ -285,7 +285,7 @@ public class RegistrationDAO implements Serializable {
                 con.close();
             }
         }
-        //_Nghia la sau cung se tra ra obj dto sau moi lan login thanh cong
+        //_Nghia la sau cung se tra ra obj dto sau moi lan update thanh cong
         return result;
     }
 
