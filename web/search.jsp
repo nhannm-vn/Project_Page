@@ -23,15 +23,17 @@ _Va phai them prefix dat ten neu khong se bug
         <font color="red">
         Welcome, ${sessionScope.USER_INFO.fullName}
         </font>
-        <h1>Search Page</h1> 
+        <div style="display: flex; justify-items: center; align-items: center">
+            <h1 style="margin-left: 10px">Search Page</h1> 
+            <form action="DispatchServlet">
+            <input type="submit" value="Logout" name="btAction" />
+        </form> 
+        </div>
         <form action="DispatchServlet" >
             Search Value <input type="text" name="txtSearchValue" 
                                 value="${param.txtSearchValue}"/> <br/>
             <input type="submit" value="Search" name="btAction"/>
         </form><br/>
-        <form action="DispatchServlet">
-            <input type="submit" value="Logout" name="btAction" />
-        </form> <br/>
         <%--Khai bao bien va gan cho no gt lay tu request gui len--%>
         <c:set var="searchValue" value="${param.txtSearchValue}" />
         <%--not empty dung de check khong null va khong rong--%>
