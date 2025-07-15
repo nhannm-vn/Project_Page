@@ -21,7 +21,7 @@ _Va phai them prefix dat ten neu khong se bug
     </head>
     <body>
         <font color="red">
-        Welcome, ${sessionScope.USER_INFO.fullName}
+        Welcome, ${sessionScope.USER_INFO.lastname}
         </font>
         <div style="display: flex; justify-items: center; align-items: center">
             <h1 style="margin-left: 10px">Search Page</h1> 

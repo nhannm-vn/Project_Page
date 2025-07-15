@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import nhannm.registration.Registration;
+import nhannm.registration.RegistrationBLO;
 import nhannm.registration.RegistrationDAO;
 import nhannm.registration.RegistrationDTO;
 
@@ -45,9 +47,10 @@ public class LoginServlet extends HttpServlet {
         try {
             //2. controller calls method Model
             //2.1 new Dao object
-            RegistrationDAO dao = new RegistrationDAO();
+//            RegistrationDAO dao = new RegistrationDAO();
+            RegistrationBLO blo = new RegistrationBLO();
             //2.2 call method of Dao object
-            RegistrationDTO result = dao.checkLogin(username, password);
+            Registration result = blo.checkLogin(username, password);
             //3. process
             if (result != null) { // Nghia la co duoc du lieu dto sau khi login success
                 //_Trong truong hop truyen vao true no di check xem co ton tai khong
@@ -78,10 +81,10 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(cookie);
             }
 
-        } catch (SQLException ex) {
-            log("SQL: " + ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            log("Class Not Found: " + ex.getMessage());
+//        } catch (SQLException ex) {
+//            log("SQL: " + ex.getMessage());
+//        } catch (ClassNotFoundException ex) {
+//            log("Class Not Found: " + ex.getMessage());
         } finally {
             //_Thang nay se lam minh bi show duong truyen
             //response.sendRedirect(url);
