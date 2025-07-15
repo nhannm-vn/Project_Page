@@ -83,7 +83,7 @@ _Va phai them prefix dat ten neu khong se bug
                                            value="${dto.password}" />
                                 </td>
                                 <td>
-                                    ${dto.fullName}
+                                    ${dto.lastname}
                                 </td>
                                 <td>
                                     <%--Nếu checkbox không được chọn (không có checked),
@@ -91,7 +91,7 @@ _Va phai them prefix dat ten neu khong se bug
                                     <input  type="checkbox" 
                                             name="chkAdmin" 
                                             value="ON" 
-                                            <c:if test="${dto.role}" >
+                                            <c:if test="${dto.isAdmin}" >
                                                checked="checked"
                                             </c:if>
                                     />

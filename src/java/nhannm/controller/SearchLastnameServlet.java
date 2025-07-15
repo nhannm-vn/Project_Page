@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
+import nhannm.registration.Registration;
+import nhannm.registration.RegistrationBLO;
 import nhannm.registration.RegistrationDAO;
 import nhannm.registration.RegistrationDTO;
 
@@ -46,14 +48,20 @@ public class SearchLastnameServlet extends HttpServlet {
             if (!searchValue.trim().isEmpty()) {
                 //2. Controller call method of Model
                 //2.1 new DAO object
-                RegistrationDAO dao = new RegistrationDAO();
+//                RegistrationDAO dao = new RegistrationDAO();
+                
+                RegistrationBLO blo = new RegistrationBLO();
+
                 //2.2 call method DAO object
                 //_Sau khi chay dong nay thi ben trong list account se co gt
-                dao.searchLastname(searchValue);
+//                dao.searchLastname(searchValue);
                 //3. process
                 //_Sau khi buoc tren co gia tri thi minh se lay danh sach ra 
                 //thong qua method getAccount vi list da bi private
-                List<RegistrationDTO> result = dao.getAccounts();
+//                List<RegistrationDTO> result = dao.getAccounts();
+
+                List<Registration> result = blo.searchLastname(searchValue);
+
                 //*Chot chuc nang cua SearchLastnameServlet la show vi moi servlet
                 //chi thuc hien duy nhat mot chuc nang
                 //*Bat buoc phai su dung trang dong, vi giao dien la dong nen bat
@@ -79,10 +87,10 @@ public class SearchLastnameServlet extends HttpServlet {
                 //**Cau lenh de lay ra danh sach kq tam thoi luu trong Attribute
                 //List<RegistrationDTO> result = (List<RegistrationDTO>)request.getAttribute("SEARCH_RESULT");
             }
-        } catch (SQLException ex) {
-            log("SQL: " + ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            log("Class Not Found: " + ex.getMessage());
+//        } catch (SQLException ex) {
+//            log("SQL: " + ex.getMessage());
+//        } catch (ClassNotFoundException ex) {
+//            log("Class Not Found: " + ex.getMessage());
         } finally {
             //_Phai dung request dispatch vi duy tri ket qua trinh bay
             RequestDispatcher rd = request.getRequestDispatcher(url);

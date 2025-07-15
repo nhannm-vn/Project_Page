@@ -4,6 +4,7 @@
  */
 package nhannm.registration;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -57,5 +58,42 @@ public class RegistrationBLO{
         return result;
     }
     
+    public List<Registration> searchLastname(String searchValue){
+        List<Registration> result = null;
+        
+        EntityManager em = emf.createEntityManager();
+        
+        String jpql = "Select r "
+                    + "From Registration r "
+                    + "Where r.lastname Like :lastname";
+        try {
+            Query query = em.createQuery(jpql);
+            
+            query.setParameter("lastname", "%" + searchValue + "%");
+            result = query.getResultList();
+        } finally {
+            em.close();
+        }
+        
+        return result;
+    }
+    //*Tat ca cau lenh CUD khong viet sql
+    public boolean deleteAccount(String username){
+        boolean result = false;
+        EntityManager em = emf.createEntityManager();
+        try {
+            Registration reg = em.find(Registration.class, username);
+            if(reg != null){
+                em.getTransaction().begin();
+                em.remove(reg);
+                em.getTransaction().commit();
+            }
+            result = true;
+        } finally {
+            em.close();
+        }
+        
+        return result;
+    }
     
 }

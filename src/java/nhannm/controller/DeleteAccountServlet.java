@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import nhannm.registration.RegistrationBLO;
 import nhannm.registration.RegistrationDAO;
 
 /**
@@ -19,7 +20,9 @@ import nhannm.registration.RegistrationDAO;
  */
 @WebServlet(name = "DeleteAccountServlet", urlPatterns = {"/DeleteAccountServlet"})
 public class DeleteAccountServlet extends HttpServlet {
+
     private final String ERROR_PAGE = "error.html";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,23 +36,24 @@ public class DeleteAccountServlet extends HttpServlet {
         try {
             //2. controller calls method model
             //2.1 new DAO object
-            RegistrationDAO dao = new RegistrationDAO();
+//            RegistrationDAO dao = new RegistrationDAO();
+            RegistrationBLO blo = new RegistrationBLO();
             //2.2 call method of DAO object
-            boolean result = dao.deleteAccount(username);
+            boolean result = blo.deleteAccount(username);
             //3. process
-            if(result){
+            if (result) {
                 // *Neu xoa thanh cong thi goi lai chuc nang truoc do de no
                 //refresh lai trang
                 //refresh --> call previos functions again 
                 //--> remind --> add request parameter based on how many input control
-                url = "DispatchServlet" 
+                url = "DispatchServlet"
                         + "?btAction=Search"
                         + "&txtSearchValue=" + searchValue;
             }//delete is successfully
-        } catch (SQLException ex) {
-            log("SQL: " + ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            log("Class Not Found: " + ex.getMessage());
+//        } catch (SQLException ex) {
+//            log("SQL: " + ex.getMessage());
+//        } catch (ClassNotFoundException ex) {
+//            log("Class Not Found: " + ex.getMessage());
         } finally {
             //forward
             // Luc nay co 5 parameter khi delete thanh cong ma nhu vay se co tan 
@@ -102,10 +106,9 @@ public class DeleteAccountServlet extends HttpServlet {
 }
 
 /**
- * Loi duoc chia thanh 2 nhom:
- * +Loi nguoi dung: nguoi dung co tinh vi pham rang buoc quy dinh cua he thong
- * --> thuc hien su dung 1 attribute de luu loi va tien hanh chuyen qua trang loi
- * de trinh bay va tien hanh ghi logfile
- * +Loi he thong: xay ra khi he thong duoc thuc thi va co lien quan den nguoi dev
- * --> thuc hien co che delogfile
+ * Loi duoc chia thanh 2 nhom: +Loi nguoi dung: nguoi dung co tinh vi pham rang
+ * buoc quy dinh cua he thong --> thuc hien su dung 1 attribute de luu loi va
+ * tien hanh chuyen qua trang loi de trinh bay va tien hanh ghi logfile +Loi he
+ * thong: xay ra khi he thong duoc thuc thi va co lien quan den nguoi dev -->
+ * thuc hien co che delogfile
  */
